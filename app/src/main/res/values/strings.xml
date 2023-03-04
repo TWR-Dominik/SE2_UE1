@@ -3,4 +3,6 @@
     <string name="Matrikelnummer">Geben Sie ihre Matrikelnummer ein</string>
     <string name="ServerOutput">Antwort vom Server</string>
     <string name="Submit">Senden</string>
+    <string name="Submit1">Berechnen</string>
+    <string name="Ergebnis">Ergebnis</string>
 </resources>

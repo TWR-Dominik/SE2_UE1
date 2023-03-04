@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.se2_ue1.databinding.ActivityMainBinding
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
 import java.net.Socket
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.run {
             button.setOnClickListener{ sendInput() }
+            button3.setOnClickListener{ findPrimeDigits() }
         }
     }
 
@@ -48,4 +47,30 @@ class MainActivity : AppCompatActivity() {
         }.start()
 
     }
+    private fun findPrimeDigits(){
+        val matrikelnummer = binding.matrikelnummer.text.toString().toInt()
+        var temp = matrikelnummer // Create a variable to store the temporary copy of the matrikelnummer.
+        var primeDigits = "" // Create a variable to store the prime digits found in the matrikelnummer.
+        while (temp > 0) { // Loop through each digit in the matrikelnummer.
+            val digit = temp % 10 // Get the last digit of the matrikelnummer.
+            if (isPrime(digit)) {  // Check if the digit is prime.
+                primeDigits += "$digit "   // Add the prime digit to the primeDigits string.
+            }
+            temp /= 10  // Remove the last digit from the matrikelnummer.
+        }
+        runOnUiThread {
+            binding.textView3.text = primeDigits
+        }
+    }
+    private fun isPrime(n: Int): Boolean{
+        if (n <= 1) return false // Check if the integer is less than or equal to 1.  1 is not considered a prime number.
+        for (i in 2..n/2) { // Loop through each integer from 2 to half of the given integer. If the integer is divisible by any number other than 1 and itself, then it is not a prime number.
+            if (n % i == 0) {
+                return false
+            }
+        }
+        return true // If the integer is not divisible by any number other than 1 and itself,then it is a prime number.
+    }
 }
+
+
