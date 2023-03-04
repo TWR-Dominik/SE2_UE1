@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SE2_UE1</string>
+    <string name="app_name">SE2_UE1_Einzelbeispiel</string>
     <string name="Matrikelnummer">Geben Sie ihre Matrikelnummer ein</string>
     <string name="ServerOutput">Antwort vom Server</string>
     <string name="Submit">Senden</string>
