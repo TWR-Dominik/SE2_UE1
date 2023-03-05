@@ -24,21 +24,21 @@ class MainActivity : AppCompatActivity() {
     private fun sendInput(){
         Thread{
             try {
-                val matrikelnummer = binding.matrikelnummer.text.toString()
-                val socket = Socket("se2-isys.aau.at",53212)
-                val toServer = socket.getOutputStream()
-                val fromServer = socket.getInputStream()
+                val matrikelnummer = binding.matrikelnummer.text.toString() // Gets the text from a UI element with the ID "matrikelnummer" (a text field where the user enters their student ID number) and converting it to a String.
+                val socket = Socket("se2-isys.aau.at",53212) // Create a socket connection to the server to the provided address
+                val toServer = socket.getOutputStream() // creates an output stream for sending data to the server through the socket.
+                val fromServer = socket.getInputStream() // creates an input stream for receiving data from the server through the socket.
 
-                toServer.write((matrikelnummer + "\n").toByteArray())
+                toServer.write((matrikelnummer + "\n").toByteArray()) // sends the student ID number (with a newline character appended to the end) to the server through the output stream.
 
-                val responseBuffer = ByteArray(1024)
-                val bytesRead = fromServer.read(responseBuffer)
-                val response = responseBuffer.copyOfRange(0, bytesRead).toString(Charsets.UTF_8)
+                val responseBuffer = ByteArray(1024) // create a Bytearray to store data from the input stream
+                val bytesRead = fromServer.read(responseBuffer) // reads the response from the server and saves it to the bytearray
+                val response = responseBuffer.copyOfRange(0, bytesRead).toString(Charsets.UTF_8) // creates a copy of the bytearray that contains only the bytes that have been read from the input stream from range 0 to byetesread. the resulting bytearry is converted to UTF8
 
-                socket.close()
+                socket.close() // closes the socket connection
 
                 runOnUiThread {
-                    binding.textView2.text = response
+                    binding.textView2.text = response // binds the UI to the response
                 }
             }catch (e: IOException) {
                 Log.d("MainActivity", "Error")
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     private fun isPrime(n: Int): Boolean{
         if (n <= 1) return false // Check if the integer is less than or equal to 1.  1 is not considered a prime number.
         for (i in 2..n/2) { // Loop through each integer from 2 to half of the given integer. If the integer is divisible by any number other than 1 and itself, then it is not a prime number.
-            if (n % i == 0) {
+            if (n % i == 0) { // checks whether n is evenly divisible by i (i.e., n % i is 0). If n is divisible by i, then n is not a prime number,
                 return false
             }
         }
